@@ -46,13 +46,13 @@ const TaskCard: React.FC<{
               <input
                 value={editTodo}
                 onChange={(e) => setEditTodo(e.target.value)}
-                className="todos__single--text"
+                className="single_todo_text"
                 ref={inputRef}
               />
             ) : todo.completed ? (
-              <s className="todos__single--text">{todo.todo}</s>
+              <s className="single_todo_text"></s>
             ) : (
-              <span className="todos__single--text">{todo.todo}</span>
+              <span className="single_todo_text">{todo.todo}</span>
             )}
             <div>
               <span
