@@ -1,24 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import InputField from './components/InputField';
+import { Todo_model } from './components/todo_model';
+import TodoList from './components/TodoList';
 
-function App() {
+const App:React.FC = () => {
+const [task,setTask] = useState<string>("");
+const [tasks,setTasks] = useState<Todo_model[]>([]);
+const [CompletedTodos, setCompletedTodos] = useState<Array<Todo_model>>([]);
+
+const handleAdd = (e: React.FormEvent) => {
+  e.preventDefault() ;
+  if (task) {
+    setTasks([...tasks,{id: Date.now(), todo: task ,completed: false}]);
+
+    setTask('')
+
+  }
+  
+};
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <span className='heading'>Taskify</span>
+      <InputField task = {task} setTask = {setTask} handleAdd = {handleAdd}/>
+      <TodoList
+       tasks = {tasks}
+       setTasks = {setTasks}
+      CompletedTodos={CompletedTodos}
+      setCompletedTodos={setCompletedTodos}/>    
     </div>
   );
 }
